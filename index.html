@@ -21,14 +21,16 @@
 
   <!-- HERO -->
   <section class="hero">
-    <div class="hero-content">
-      <h1>Akshada Bandarkar</h1>
-      <p>Mechanical Engineer | Automation | HVAC | 3D Printing</p>
-      <div class="buttons">
-        <button onclick="downloadResume()">Download Resume</button>
-        <a href="#" class="btn-outline">LinkedIn</a>
-      </div>
-    </div>
+    <canvas id="hero-canvas"></canvas>
+    <div class="hero-content glass">
+  <h1>Akshada Bandarkar</h1>
+  <p>Mechanical Engineer | Automation | HVAC | 3D Printing</p>
+
+  <div class="buttons">
+    <button onclick="downloadResume()">Download Resume</button>
+    <a href="#" class="btn-outline">LinkedIn</a>
+  </div>
+</div>
   </section>
 
   <!-- ABOUT -->
@@ -79,7 +81,7 @@
     <p>Email: bandarkarakshada04@gmail.com</p>
     <p>Phone: +91-XXXXXXXXXX</p>
   </section>
-
-  <script src="script.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+<script src="script.js"></script>
 </body>
 </html>
