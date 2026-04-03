@@ -1,50 +1,103 @@
-body {
+* {
   margin: 0;
-  font-family: Arial, sans-serif;
-  background: #0a0a0a;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  background: linear-gradient(135deg, #0a0a0a, #111827);
   color: white;
 }
 
-section {
-  padding: 60px 20px;
-  text-align: center;
+/* NAVBAR */
+.navbar {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  padding: 15px 40px;
+  display: flex;
+  justify-content: space-between;
+  backdrop-filter: blur(10px);
+  background: rgba(0,0,0,0.5);
 }
 
+.navbar ul {
+  display: flex;
+  gap: 20px;
+  list-style: none;
+}
+
+.navbar a {
+  color: white;
+  text-decoration: none;
+}
+
+/* HERO */
 .hero {
   height: 100vh;
   display: flex;
-  flex-direction: column;
   justify-content: center;
+  align-items: center;
+  text-align: center;
 }
 
-button {
-  padding: 10px 20px;
-  border: none;
-  background: white;
-  color: black;
-  cursor: pointer;
+.hero h1 {
+  font-size: 50px;
+  background: linear-gradient(to right, #00f5ff, #7c3aed);
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+.buttons {
   margin-top: 20px;
 }
 
-.grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 20px;
+button, .btn-outline {
+  padding: 10px 20px;
+  margin: 10px;
+  border-radius: 25px;
+  cursor: pointer;
 }
 
+button {
+  background: #00f5ff;
+  border: none;
+}
+
+.btn-outline {
+  border: 1px solid #00f5ff;
+  text-decoration: none;
+  color: #00f5ff;
+}
+
+/* SECTIONS */
+.section {
+  padding: 100px 20px;
+  text-align: center;
+}
+
+.dark {
+  background: #0f172a;
+}
+
+/* GRID */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  margin-top: 30px;
+}
+
+/* CARD */
 .card {
-  background: #1a1a1a;
   padding: 20px;
-  margin: 20px auto;
-  max-width: 400px;
-  border-radius: 10px;
+  border-radius: 15px;
+  background: rgba(255,255,255,0.05);
+  backdrop-filter: blur(10px);
   transition: 0.3s;
 }
 
 .card:hover {
-  transform: scale(1.05);
-}
-
-h2 {
-  margin-bottom: 20px;
+  transform: translateY(-10px) scale(1.03);
 }
