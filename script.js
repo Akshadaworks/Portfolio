@@ -1,10 +1,6 @@
-function downloadResume() {
-  window.open("resume.pdf", "_blank");
-}
-
-// SPHERE ANIMATION
-function initSphere() {
-  const canvas = document.getElementById("hero-canvas");
+function initThreeJS() {
+  const canvas = document.getElementById('hero-canvas');
+  if (!canvas) return;
 
   const scene = new THREE.Scene();
 
@@ -19,52 +15,57 @@ function initSphere() {
   const renderer = new THREE.WebGLRenderer({
     canvas: canvas,
     alpha: true,
-    antialias: true,
+    antialias: true
   });
 
   renderer.setSize(window.innerWidth, window.innerHeight);
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
-  // 🔷 GEOMETRY
-  const geometry = new THREE.IcosahedronGeometry(3.2, 3);
+  // 🔥 BIGGER + SMOOTHER SPHERE
+  const geometry = new THREE.IcosahedronGeometry(3.2, 4);
 
-  // 🔵 WIREFRAME
-  const wireMaterial = new THREE.MeshBasicMaterial({
-    color: 0x00f5ff,
-    wireframe: true,
+  // 🔵 WIREFRAME (VISIBLE NOW)
+  const wireMaterial = new THREE.LineBasicMaterial({
+    color: 0x00f3ff,
     transparent: true,
-    opacity: 0.25,
+    opacity: 0.6
   });
 
-  const wireSphere = new THREE.Mesh(geometry, wireMaterial);
+  const wireframe = new THREE.LineSegments(
+    new THREE.WireframeGeometry(geometry),
+    wireMaterial
+  );
 
-  // 🟣 DOTS (VERTEX POINTS)
+  // 🟣 DOTS (MORE VISIBLE)
   const pointsMaterial = new THREE.PointsMaterial({
-    color: 0x7c3aed,
-    size: 0.05,
+    color: 0x9d2eff,
+    size: 0.08,
     transparent: true,
-    opacity: 0.9,
+    opacity: 1
   });
 
   const points = new THREE.Points(geometry, pointsMaterial);
 
-  // 🔥 GROUP (IMPORTANT)
+  // 🔥 GROUP
   const group = new THREE.Group();
-  group.add(wireSphere);
+  group.add(wireframe);
   group.add(points);
 
-  // POSITION RIGHT
-  group.position.x = window.innerWidth > 768 ? 2.5 : 0;
+  // 👉 POSITION FIX (NOT TOO FAR)
+  group.position.x = window.innerWidth > 768 ? 1.5 : 0;
 
   scene.add(group);
 
   // 🖱️ MOUSE INTERACTION
-  let mouseX = 0;
-  let mouseY = 0;
+  let mouseX = 0, mouseY = 0;
+  let targetX = 0, targetY = 0;
 
-  document.addEventListener("mousemove", (e) => {
-    mouseX = (e.clientX - window.innerWidth / 2) * 0.0008;
-    mouseY = (e.clientY - window.innerHeight / 2) * 0.0008;
+  const halfX = window.innerWidth / 2;
+  const halfY = window.innerHeight / 2;
+
+  document.addEventListener('mousemove', (e) => {
+    mouseX = (e.clientX - halfX);
+    mouseY = (e.clientY - halfY);
   });
 
   const clock = new THREE.Clock();
@@ -74,13 +75,16 @@ function initSphere() {
 
     const time = clock.getElapsedTime();
 
-    // 🔄 ROTATION
+    // 🔄 BASE ROTATION
     group.rotation.y += 0.003;
     group.rotation.x += 0.0015;
 
     // 🧠 SMOOTH FOLLOW
-    group.rotation.y += (mouseX - group.rotation.y) * 0.02;
-    group.rotation.x += (mouseY - group.rotation.x) * 0.02;
+    targetX = mouseX * 0.0008;
+    targetY = mouseY * 0.0008;
+
+    group.rotation.y += (targetX - group.rotation.y) * 0.05;
+    group.rotation.x += (targetY - group.rotation.x) * 0.05;
 
     // 💓 BREATHING EFFECT
     const scale = 1 + Math.sin(time * 2) * 0.03;
@@ -92,13 +96,14 @@ function initSphere() {
   animate();
 
   // 📱 RESPONSIVE
-  window.addEventListener("resize", () => {
+  window.addEventListener('resize', () => {
     camera.aspect = window.innerWidth / window.innerHeight;
     camera.updateProjectionMatrix();
     renderer.setSize(window.innerWidth, window.innerHeight);
 
-    group.position.x = window.innerWidth > 768 ? 2.5 : 0;
+    group.position.x = window.innerWidth > 768 ? 1.5 : 0;
   });
 }
 
-initSphere();
+// INIT
+initThreeJS();
