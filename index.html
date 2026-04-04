@@ -4,68 +4,101 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Akshada Bandarkar Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
   <!-- NAVBAR -->
   <nav class="navbar">
-    <h2>Akshada B.</h2>
-    <ul>
+    <div class="nav-logo">
+      <span class="logo-bracket">[</span>AB<span class="logo-bracket">]</span>
+    </div>
+    <ul class="nav-links">
       <li><a href="#about">About</a></li>
       <li><a href="#skills">Skills</a></li>
+      <li><a href="#experience">Experience</a></li>
       <li><a href="#projects">Projects</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
-    <!-- 🌗 Theme Toggle -->
-  <button id="theme-toggle">🌙</button>
+    <div class="nav-right">
+      <button id="theme-toggle" aria-label="Toggle theme">🌙</button>
+      <button class="nav-cta" onclick="downloadResume()">Resume ↗</button>
+    </div>
+    <!-- Mobile hamburger -->
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
   </nav>
+
+  <!-- Mobile Drawer -->
+  <div class="mobile-drawer" id="mobile-drawer">
+    <ul>
+      <li><a href="#about" onclick="closeDrawer()">About</a></li>
+      <li><a href="#skills" onclick="closeDrawer()">Skills</a></li>
+      <li><a href="#experience" onclick="closeDrawer()">Experience</a></li>
+      <li><a href="#projects" onclick="closeDrawer()">Projects</a></li>
+      <li><a href="#contact" onclick="closeDrawer()">Contact</a></li>
+    </ul>
+  </div>
 
   <!-- HERO -->
   <section class="hero">
     <canvas id="hero-canvas"></canvas>
-    <div class="hero-content glass">
-  <h1>Akshada Bandarkar</h1>
-  <p>Mechanical Engineer | Automation | HVAC | 3D Printing</p>
 
-  <div class="buttons">
-    <button onclick="downloadResume()">Download Resume</button>
-    <a href="#" class="btn-outline">LinkedIn</a>
-  </div>
-</div>
-<div class="scroll-hint" onclick="scrollToAbout()">
-  <p>Scroll</p>
-  <div class="arrow"></div>
-</div>
+    <!-- Floating label chips -->
+    <div class="hero-chip chip-1 float-chip">CAD & FEA</div>
+    <div class="hero-chip chip-2 float-chip">ANSYS</div>
+    <div class="hero-chip chip-3 float-chip">3D Printing</div>
+
+    <div class="hero-content glass">
+      <div class="hero-tag">Mechanical Engineer</div>
+      <h1 class="hero-name">Akshada<br><span class="hero-surname">Bandarkar</span></h1>
+      <p class="hero-sub">Automation · HVAC · Design · CAE</p>
+      <div class="buttons">
+        <button onclick="downloadResume()" class="btn-primary">Download Resume</button>
+        <a href="https://linkedin.com" target="_blank" class="btn-outline">LinkedIn ↗</a>
+      </div>
+    </div>
+
+    <div class="scroll-hint" onclick="scrollToAbout()">
+      <p>Scroll</p>
+      <div class="arrow"></div>
+    </div>
   </section>
 
   <!-- ABOUT -->
-  <section id="about" class="section">
-  <h2>About Me</h2>
+  <section id="about" class="section reveal">
+    <div class="section-label">01 / About</div>
+    <h2>Hello, I'm Akshada</h2>
 
-  <div class="about-container">
-
-    <!-- LEFT: INTRO -->
-    <div class="about-left">
-      <h3>👋 Hello, I'm Akshada</h3>
-      <p>
-        A final-year Mechanical Engineering student passionate about 
-        designing efficient systems and solving real-world engineering problems.
-        I enjoy working at the intersection of design, analysis, and manufacturing.
-      </p>
-
-      <p>
-        My experience spans CAD modeling, FEA simulation, and production support, 
-        with hands-on exposure through internships and technical projects.
-      </p>
-    </div>
-
-    <!-- RIGHT: HIGHLIGHTS -->
-    <div class="about-right">
-
-      <div class="about-box">
-        <h4>🎓 Education</h4>
-        <p>B.Tech Mechanical Engineering (Final Year)</p>
+    <div class="about-container">
+      <div class="about-left">
+        <p>
+          A final-year Mechanical Engineering student passionate about 
+          designing efficient systems and solving real-world engineering problems.
+          I thrive at the intersection of <strong>design, analysis, and manufacturing</strong>.
+        </p>
+        <p>
+          My experience spans CAD modeling, FEA simulation, and production support —
+          with hands-on exposure through internships at IIT Bombay, Protomont, and Kopran Ltd.
+        </p>
+        <div class="about-stats">
+          <div class="stat">
+            <span class="stat-num">3+</span>
+            <span class="stat-label">Internships</span>
+          </div>
+          <div class="stat">
+            <span class="stat-num">5+</span>
+            <span class="stat-label">Projects</span>
+          </div>
+          <div class="stat">
+            <span class="stat-num">4</span>
+            <span class="stat-label">Years Study</span>
+          </div>
+        </div>
       </div>
 
       <div class="about-box">
@@ -82,92 +115,243 @@
         <h4>🚀 Goal</h4>
         <p>To build efficient, scalable, and practical engineering solutions</p>
       </div>
-
     </div>
-
-  </div>
-</section>
+  </section>
 
   <!-- SKILLS -->
-  <section id="skills" class="section dark">
-  <h2>Engineering Skillset</h2>
+  <section id="skills" class="section dark reveal">
+    <div class="section-label">02 / Skills</div>
+    <h2>Engineering Skillset</h2>
 
-  <div class="grid skills-grid">
-
-    <div class="card skill-card">
-      <h3>🛠️ CAD & Design</h3>
-      <ul>
-        <li>SolidWorks</li>
-        <li>AutoCAD</li>
-        <li>CREO</li>
-        <li>Engineering Drawings</li>
-        <li>GD&T Interpretation</li>
-      </ul>
+    <div class="grid skills-grid">
+      <div class="card skill-card reveal-child">
+        <h3>🛠️ CAD & Design</h3>
+        <ul>
+          <li>SolidWorks</li>
+          <li>AutoCAD</li>
+          <li>CREO</li>
+          <li>Engineering Drawings</li>
+          <li>GD&T Interpretation</li>
+        </ul>
+      </div>
+      <div class="card skill-card reveal-child">
+        <h3>📊 CAE & Simulation</h3>
+        <ul>
+          <li>ANSYS Mechanical</li>
+          <li>Finite Element Analysis</li>
+          <li>ANSYS Workbench</li>
+          <li>MATLAB</li>
+        </ul>
+      </div>
+      <div class="card skill-card reveal-child">
+        <h3>🏭 Manufacturing</h3>
+        <ul>
+          <li>3D Printing (Additive)</li>
+          <li>Production Planning</li>
+          <li>Quality Inspection</li>
+          <li>ERP Tracking</li>
+        </ul>
+      </div>
+      <div class="card skill-card reveal-child">
+        <h3>⚡ Tools & Automation</h3>
+        <ul>
+          <li>Python (Basic)</li>
+          <li>LTspice</li>
+          <li>EasyEDA</li>
+          <li>MS Office Suite</li>
+        </ul>
+      </div>
     </div>
+  </section>
 
-    <div class="card skill-card">
-      <h3>📊 CAE & Simulation</h3>
-      <ul>
-        <li>ANSYS Mechanical</li>
-        <li>Finite Element Analysis (FEA)</li>
-        <li>ANSYS Workbench</li>
-        <li>MATLAB</li>
-      </ul>
+  <!-- EXPERIENCE TIMELINE -->
+  <section id="experience" class="section reveal">
+    <div class="section-label">03 / Experience</div>
+    <h2>Career Timeline</h2>
+
+    <div class="timeline">
+
+      <div class="timeline-item reveal-child">
+        <div class="timeline-dot"></div>
+        <div class="timeline-date">2024</div>
+        <div class="timeline-card">
+          <div class="timeline-tag">Internship</div>
+          <h3>IIT Bombay</h3>
+          <p class="timeline-role">Research Intern — Mechanical Systems</p>
+          <p class="timeline-desc">
+            Worked on research-oriented mechanical design tasks, contributing to structural analysis 
+            and simulation workflows in an academic research environment.
+          </p>
+          <div class="timeline-skills">
+            <span>ANSYS</span><span>FEA</span><span>SolidWorks</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline-item reveal-child">
+        <div class="timeline-dot"></div>
+        <div class="timeline-date">2023</div>
+        <div class="timeline-card">
+          <div class="timeline-tag">Internship</div>
+          <h3>Protomont Technologies</h3>
+          <p class="timeline-role">Design & Manufacturing Intern</p>
+          <p class="timeline-desc">
+            Hands-on experience with 3D printing workflows, CAD modeling, and 
+            rapid prototyping. Contributed to design-for-manufacturability reviews.
+          </p>
+          <div class="timeline-skills">
+            <span>3D Printing</span><span>CREO</span><span>DFM</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline-item reveal-child">
+        <div class="timeline-dot"></div>
+        <div class="timeline-date">2022</div>
+        <div class="timeline-card">
+          <div class="timeline-tag">Internship</div>
+          <h3>Kopran Ltd.</h3>
+          <p class="timeline-role">Production Engineering Intern</p>
+          <p class="timeline-desc">
+            Supported production planning and quality inspection processes. 
+            Gained exposure to ERP systems and shop-floor operations in a manufacturing environment.
+          </p>
+          <div class="timeline-skills">
+            <span>ERP</span><span>Quality Control</span><span>Production</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline-item reveal-child">
+        <div class="timeline-dot timeline-dot-start"></div>
+        <div class="timeline-date">2021</div>
+        <div class="timeline-card">
+          <div class="timeline-tag">Education</div>
+          <h3>B.Tech Mechanical Engineering</h3>
+          <p class="timeline-role">Undergraduate Studies — Batch of 2025</p>
+          <p class="timeline-desc">
+            Core focus on mechanical design, thermodynamics, fluid mechanics, 
+            CAE, and manufacturing processes.
+          </p>
+          <div class="timeline-skills">
+            <span>Core Mech</span><span>Thermodynamics</span><span>CAE</span>
+          </div>
+        </div>
+      </div>
+
     </div>
-
-    <div class="card skill-card">
-      <h3>🏭 Manufacturing</h3>
-      <ul>
-        <li>3D Printing (Additive)</li>
-        <li>Production Planning</li>
-        <li>Quality Inspection</li>
-        <li>ERP Tracking</li>
-      </ul>
-    </div>
-
-    <div class="card skill-card">
-      <h3>⚡ Tools & Automation</h3>
-      <ul>
-        <li>Python (Basic)</li>
-        <li>LTspice</li>
-        <li>EasyEDA</li>
-      </ul>
-    </div>
-
-  </div>
-</section>
+  </section>
 
   <!-- PROJECTS -->
-  <section id="projects" class="section">
+  <section id="projects" class="section dark reveal">
+    <div class="section-label">04 / Projects</div>
     <h2>Projects</h2>
 
-    <div class="grid">
+    <div class="projects-grid">
 
-      <div class="card project">
-        <h3>Wind Turbine</h3>
-        <p>Designed & tested turbine with performance analysis.</p>
+      <div class="project-card featured reveal-child">
+        <div class="project-number">01</div>
+        <div class="project-img-placeholder">
+          <div class="project-icon">🌬️</div>
+        </div>
+        <div class="project-body">
+          <div class="project-tags">
+            <span>SolidWorks</span><span>ANSYS</span><span>Aerodynamics</span>
+          </div>
+          <h3>Wind Turbine Design</h3>
+          <p>Designed and tested a small-scale wind turbine with full performance analysis. 
+             Optimized blade geometry for maximum efficiency using FEA simulation and aerodynamic modeling.</p>
+          <div class="project-links">
+            <a href="#" class="proj-link">View Details →</a>
+          </div>
+        </div>
       </div>
 
-      <div class="card project">
-        <h3>Stamping Mechanism</h3>
-        <p>Automated system for consistent stamping process.</p>
+      <div class="project-card reveal-child">
+        <div class="project-number">02</div>
+        <div class="project-img-placeholder">
+          <div class="project-icon">🔩</div>
+        </div>
+        <div class="project-body">
+          <div class="project-tags">
+            <span>AutoCAD</span><span>Mechanism Design</span>
+          </div>
+          <h3>Stamping Mechanism</h3>
+          <p>Designed an automated stamping system for consistent, repeatable stamping in a production context. Reduced variability through mechanical design improvements.</p>
+          <div class="project-links">
+            <a href="#" class="proj-link">View Details →</a>
+          </div>
+        </div>
       </div>
 
-      <div class="card project">
-        <h3>Pothole Detection</h3>
-        <p>Real-time monitoring system using sensors.</p>
+      <div class="project-card reveal-child">
+        <div class="project-number">03</div>
+        <div class="project-img-placeholder">
+          <div class="project-icon">🛣️</div>
+        </div>
+        <div class="project-body">
+          <div class="project-tags">
+            <span>Sensors</span><span>Python</span><span>IoT</span>
+          </div>
+          <h3>Pothole Detection System</h3>
+          <p>Real-time road monitoring system using sensors to detect and log potholes. Bridges mechanical and software domains with practical urban infrastructure application.</p>
+          <div class="project-links">
+            <a href="#" class="proj-link">View Details →</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card reveal-child">
+        <div class="project-number">04</div>
+        <div class="project-img-placeholder">
+          <div class="project-icon">❄️</div>
+        </div>
+        <div class="project-body">
+          <div class="project-tags">
+            <span>HVAC</span><span>Thermal Analysis</span>
+          </div>
+          <h3>HVAC System Analysis</h3>
+          <p>Thermal performance evaluation of an HVAC setup, with load calculations and system optimization recommendations for improved energy efficiency.</p>
+          <div class="project-links">
+            <a href="#" class="proj-link">View Details →</a>
+          </div>
+        </div>
       </div>
 
     </div>
   </section>
 
   <!-- CONTACT -->
-  <section id="contact" class="section dark">
-    <h2>Contact</h2>
-    <p>Email: bandarkarakshada04@gmail.com</p>
-    <p>Phone: +91-XXXXXXXXXX</p>
+  <section id="contact" class="section reveal">
+    <div class="section-label">05 / Contact</div>
+    <h2>Get In Touch</h2>
+    <p class="contact-sub">Open to opportunities, collaborations, and conversations.</p>
+
+    <div class="contact-grid">
+      <div class="contact-card reveal-child">
+        <div class="contact-icon">✉️</div>
+        <h4>Email</h4>
+        <a href="mailto:bandarkarakshada04@gmail.com">bandarkarakshada04@gmail.com</a>
+      </div>
+      <div class="contact-card reveal-child">
+        <div class="contact-icon">📱</div>
+        <h4>Phone</h4>
+        <a href="tel:+91XXXXXXXXXX">+91-XXXXXXXXXX</a>
+      </div>
+      <div class="contact-card reveal-child">
+        <div class="contact-icon">🔗</div>
+        <h4>LinkedIn</h4>
+        <a href="https://linkedin.com" target="_blank">Connect on LinkedIn ↗</a>
+      </div>
+    </div>
   </section>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
-<script src="script.js"></script>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <p>Designed & built with care · Akshada Bandarkar © 2025</p>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>

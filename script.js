@@ -1,10 +1,7 @@
 /* =========================
-   🌗 THEME TOGGLE
+   THEME TOGGLE
 ========================= */
-
 const toggleBtn = document.getElementById("theme-toggle");
-
-// Load saved theme
 const savedTheme = localStorage.getItem("theme");
 
 if (savedTheme === "light") {
@@ -14,32 +11,89 @@ if (savedTheme === "light") {
   toggleBtn.textContent = "🌙";
 }
 
-// Toggle theme
 toggleBtn.addEventListener("click", () => {
   document.body.classList.toggle("light-theme");
+  const isLight = document.body.classList.contains("light-theme");
+  toggleBtn.textContent = isLight ? "☀️" : "🌙";
+  localStorage.setItem("theme", isLight ? "light" : "dark");
+});
 
-  if (document.body.classList.contains("light-theme")) {
-    toggleBtn.textContent = "☀️";
-    localStorage.setItem("theme", "light");
-  } else {
-    toggleBtn.textContent = "🌙";
-    localStorage.setItem("theme", "dark");
+/* =========================
+   MOBILE DRAWER
+========================= */
+const hamburger = document.getElementById("hamburger");
+const drawer = document.getElementById("mobile-drawer");
+
+hamburger.addEventListener("click", () => {
+  drawer.classList.toggle("open");
+});
+
+function closeDrawer() {
+  drawer.classList.remove("open");
+}
+
+document.addEventListener("click", (e) => {
+  if (!drawer.contains(e.target) && !hamburger.contains(e.target)) {
+    drawer.classList.remove("open");
   }
 });
 
+/* =========================
+   SCROLL REVEAL
+========================= */
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add("visible");
+    }
+  });
+}, { threshold: 0.12 });
+
+document.querySelectorAll(".reveal").forEach(el => revealObserver.observe(el));
+
+// Staggered children
+const childObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const siblings = entry.target.parentElement.querySelectorAll(".reveal-child");
+      siblings.forEach((child, i) => {
+        setTimeout(() => {
+          child.classList.add("visible");
+        }, i * 100);
+      });
+    }
+  });
+}, { threshold: 0.1 });
+
+// Observe parent sections that contain reveal-children
+document.querySelectorAll(".section").forEach(section => {
+  const children = section.querySelectorAll(".reveal-child");
+  if (children.length > 0) childObserver.observe(section);
+});
 
 /* =========================
-   ⚙️ THREE JS HERO (UPDATED COLORS)
+   NAVBAR SCROLL EFFECT
 ========================= */
+window.addEventListener("scroll", () => {
+  const navbar = document.querySelector(".navbar");
+  if (window.scrollY > 40) {
+    navbar.style.borderBottomColor = "var(--border)";
+  } else {
+    navbar.style.borderBottomColor = "transparent";
+  }
+});
 
+/* =========================
+   THREE.JS HERO
+========================= */
 function initThreeJS() {
   const canvas = document.getElementById('hero-canvas');
-  if (!canvas) return;
+  if (!canvas || typeof THREE === 'undefined') return;
 
   const scene = new THREE.Scene();
 
   const camera = new THREE.PerspectiveCamera(
-    75,
+    70,
     window.innerWidth / window.innerHeight,
     0.1,
     1000
@@ -47,66 +101,74 @@ function initThreeJS() {
   camera.position.z = 6;
 
   const renderer = new THREE.WebGLRenderer({
-    canvas: canvas,
+    canvas,
     alpha: true,
     antialias: true
   });
-
   renderer.setSize(window.innerWidth, window.innerHeight);
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
-  const geometry = new THREE.IcosahedronGeometry(3.2, 4);
+  // Main icosahedron
+  const geometry = new THREE.IcosahedronGeometry(3.0, 4);
 
-  let wireMaterial = new THREE.LineBasicMaterial({
-    color: 0xff7a18,
+  const wireMaterial = new THREE.LineBasicMaterial({
+    color: 0xc96a1a,
     transparent: true,
-    opacity: 0.6
+    opacity: 0.45
   });
 
-  let pointsMaterial = new THREE.PointsMaterial({
-    color: 0xffffff,
-    size: 0.08
+  const pointsMaterial = new THREE.PointsMaterial({
+    color: 0xe8823a,
+    size: 0.055,
+    transparent: true,
+    opacity: 0.7
   });
 
   const wireframe = new THREE.LineSegments(
     new THREE.WireframeGeometry(geometry),
     wireMaterial
   );
-
   const points = new THREE.Points(geometry, pointsMaterial);
 
   const group = new THREE.Group();
   group.add(wireframe);
   group.add(points);
-
   scene.add(group);
 
+  // Small orbiting ring
+  const ringGeo = new THREE.TorusGeometry(4.5, 0.015, 8, 80);
+  const ringMat = new THREE.LineBasicMaterial({
+    color: 0xc96a1a,
+    transparent: true,
+    opacity: 0.2
+  });
+  const ring = new THREE.Line(ringGeo, ringMat);
+  ring.rotation.x = Math.PI / 3;
+  scene.add(ring);
+
   let mouseX = 0, mouseY = 0;
-  let targetX = 0, targetY = 0;
 
   document.addEventListener('mousemove', (e) => {
-    mouseX = (e.clientX - window.innerWidth / 2);
-    mouseY = (e.clientY - window.innerHeight / 2);
+    mouseX = (e.clientX - window.innerWidth / 2) * 0.0007;
+    mouseY = (e.clientY - window.innerHeight / 2) * 0.0007;
   });
 
   const clock = new THREE.Clock();
 
   function animate() {
     requestAnimationFrame(animate);
-
     const time = clock.getElapsedTime();
 
-    group.rotation.y += 0.003;
-    group.rotation.x += 0.0015;
+    group.rotation.y += 0.002;
+    group.rotation.x += 0.001;
 
-    targetX = mouseX * 0.0008;
-    targetY = mouseY * 0.0008;
+    group.rotation.y += (mouseX - group.rotation.y) * 0.04;
+    group.rotation.x += (mouseY - group.rotation.x) * 0.04;
 
-    group.rotation.y += (targetX - group.rotation.y) * 0.05;
-    group.rotation.x += (targetY - group.rotation.x) * 0.05;
-
-    const scale = 1 + Math.sin(time * 2) * 0.03;
+    const scale = 1 + Math.sin(time * 1.5) * 0.025;
     group.scale.set(scale, scale, scale);
+
+    ring.rotation.z += 0.003;
 
     renderer.render(scene, camera);
   }
@@ -122,8 +184,16 @@ function initThreeJS() {
 
 initThreeJS();
 
+/* =========================
+   HELPERS
+========================= */
 function scrollToAbout() {
-  document.getElementById("about").scrollIntoView({
-    behavior: "smooth"
-  });
+  document.getElementById("about").scrollIntoView({ behavior: "smooth" });
+}
+
+function downloadResume() {
+  const a = document.createElement("a");
+  a.href = "Resume.pdf";
+  a.download = "Akshada_Bandarkar_Resume.pdf";
+  a.click();
 }
