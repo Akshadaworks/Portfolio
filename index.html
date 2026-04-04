@@ -59,7 +59,7 @@
       <p class="hero-sub">Automation · HVAC · Design · CAE</p>
       <div class="buttons">
         <button onclick="downloadResume()" class="btn-primary">Download Resume</button>
-        <a href="https://www.linkedin.com/in/akshadabr/" target="_blank" class="btn-outline">LinkedIn ↗</a>
+        <a href="https://linkedin.com" target="_blank" class="btn-outline">LinkedIn ↗</a>
       </div>
     </div>
 
@@ -168,112 +168,227 @@
     </div>
   </section>
 
-  <!-- EXPERIENCE TIMELINE -->
-  <section id="experience" class="section reveal">
-    <div class="section-label">03 / Experience</div>
-    <h2>Career Timeline</h2>
+  <!-- EXPERIENCE STACKED CARDS -->
+  <section id="experience" class="exp-section">
+    <div class="exp-header">
+      <div class="section-label">03 / Experience</div>
+      <h2>Career Timeline</h2>
+    </div>
 
-    <div class="timeline">
+    <div class="exp-stack" id="expStack">
 
-      <div class="timeline-item reveal-child">
-        <div class="timeline-dot"></div>
-        <div class="timeline-date">2026</div>
-        <div class="timeline-card">
-          <div class="timeline-tag">Internship</div>
-          <h3>IIT Bombay NCAIR</h3>
-          <p class="timeline-role">Research Intern — Mechanical Systems</p>
-          <p class="timeline-desc">
-            <ul style="list-style-type: square;">
-            <li>Supported validation of IAF aligned diagnostic sensing subsystems</li>
-            <li>Prepared experimental setups for sensor performance characterization</li>
-            <li>Recorded response data during subsystem testing workflows</li>
-            <li>Assisted technical documentation for diagnostic hardware evaluation</li>
-            </ul>
-          </p>
-          <div class="timeline-skills">
-            <span>EasyEDA</span><span>LTspice</span><span>Sensor validation</span>
+      <!-- CARD 1 -->
+      <div class="exp-card" data-index="0">
+        <div class="exp-card-inner">
+          <div class="exp-card-left">
+            <div class="exp-icon-wrap">
+              <!-- IIT Bombay icon: circuit / sensor -->
+              <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg" class="exp-svg">
+                <circle cx="40" cy="40" r="38" stroke="currentColor" stroke-width="1.5" opacity="0.2"/>
+                <rect x="28" y="28" width="24" height="24" rx="3" stroke="currentColor" stroke-width="2"/>
+                <circle cx="40" cy="40" r="5" fill="currentColor" opacity="0.7"/>
+                <line x1="40" y1="10" x2="40" y2="28" stroke="currentColor" stroke-width="1.5"/>
+                <line x1="40" y1="52" x2="40" y2="70" stroke="currentColor" stroke-width="1.5"/>
+                <line x1="10" y1="40" x2="28" y2="40" stroke="currentColor" stroke-width="1.5"/>
+                <line x1="52" y1="40" x2="70" y2="40" stroke="currentColor" stroke-width="1.5"/>
+                <circle cx="40" cy="10" r="3" fill="currentColor"/>
+                <circle cx="40" cy="70" r="3" fill="currentColor"/>
+                <circle cx="10" cy="40" r="3" fill="currentColor"/>
+                <circle cx="70" cy="40" r="3" fill="currentColor"/>
+              </svg>
+            </div>
+            <div class="exp-card-meta">
+              <span class="exp-tag">Internship</span>
+              <div class="exp-year">2026</div>
+            </div>
           </div>
+          <div class="exp-card-right">
+            <h3 class="exp-company">IIT Bombay NCAIR</h3>
+            <p class="exp-role">Research Intern — Diagnostic Sensing Systems</p>
+            <ul class="exp-bullets">
+              <li>Supported validation of IAF aligned diagnostic sensing subsystems</li>
+              <li>Prepared experimental setups for sensor performance characterization</li>
+              <li>Recorded response data during subsystem testing workflows</li>
+              <li>Assisted technical documentation for diagnostic hardware evaluation</li>
+            </ul>
+            <div class="exp-skills">
+              <span>EasyEDA</span><span>LTspice</span><span>Sensor Validation</span>
+            </div>
+          </div>
+        </div>
+        <div class="exp-card-peek">
+          <span class="peek-year">2026</span>
+          <span class="peek-name">IIT Bombay NCAIR</span>
+          <span class="peek-role">Research Intern</span>
         </div>
       </div>
 
-      <div class="timeline-item reveal-child">
-        <div class="timeline-dot"></div>
-        <div class="timeline-date">2025</div>
-        <div class="timeline-card">
-          <div class="timeline-tag">Internship</div>
-          <h3>Eleation Pvt. Ltd.</h3>
-          <p class="timeline-role">Mechanical Design Engineering Intern</p>
-          <p class="timeline-desc">
-            <ul style="list-style-type: square;">
-            <li>Performed static structural simulations using ANSYS Workbench</li>
-            <li>Prepared simulation ready geometries using CREO preprocessing tools</li>
-            <li>Generated meshes for stress and deformation evaluation studies</li>
-            <li>Interpreted simulation outputs for component level validation</li>
-            </ul>
-          </p>
-          <div class="timeline-skills">
-            <span>Ansys Mechanical</span><span>Ansys Workbench</span><span>CREO</span>
+      <!-- CARD 2 -->
+      <div class="exp-card" data-index="1">
+        <div class="exp-card-inner">
+          <div class="exp-card-left">
+            <div class="exp-icon-wrap">
+              <!-- FEA / mesh icon -->
+              <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg" class="exp-svg">
+                <polygon points="40,8 72,60 8,60" stroke="currentColor" stroke-width="2" fill="none" opacity="0.25"/>
+                <polygon points="40,24 58,52 22,52" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                <circle cx="40" cy="8" r="3.5" fill="currentColor"/>
+                <circle cx="72" cy="60" r="3.5" fill="currentColor"/>
+                <circle cx="8" cy="60" r="3.5" fill="currentColor"/>
+                <circle cx="40" cy="24" r="3" fill="currentColor" opacity="0.6"/>
+                <circle cx="58" cy="52" r="3" fill="currentColor" opacity="0.6"/>
+                <circle cx="22" cy="52" r="3" fill="currentColor" opacity="0.6"/>
+                <line x1="40" y1="8" x2="40" y2="24" stroke="currentColor" stroke-width="1" opacity="0.5"/>
+                <line x1="72" y1="60" x2="58" y2="52" stroke="currentColor" stroke-width="1" opacity="0.5"/>
+                <line x1="8" y1="60" x2="22" y2="52" stroke="currentColor" stroke-width="1" opacity="0.5"/>
+              </svg>
+            </div>
+            <div class="exp-card-meta">
+              <span class="exp-tag">Internship</span>
+              <div class="exp-year">2025</div>
+            </div>
           </div>
+          <div class="exp-card-right">
+            <h3 class="exp-company">Eleation Pvt. Ltd.</h3>
+            <p class="exp-role">Mechanical Design Engineering Intern</p>
+            <ul class="exp-bullets">
+              <li>Performed static structural simulations using ANSYS Workbench</li>
+              <li>Prepared simulation-ready geometries using CREO preprocessing tools</li>
+              <li>Generated meshes for stress and deformation evaluation studies</li>
+              <li>Interpreted simulation outputs for component level validation</li>
+            </ul>
+            <div class="exp-skills">
+              <span>ANSYS Mechanical</span><span>ANSYS Workbench</span><span>CREO</span>
+            </div>
+          </div>
+        </div>
+        <div class="exp-card-peek">
+          <span class="peek-year">2025</span>
+          <span class="peek-name">Eleation Pvt. Ltd.</span>
+          <span class="peek-role">Mechanical Design Intern</span>
         </div>
       </div>
 
-      <div class="timeline-item reveal-child">
-        <div class="timeline-dot"></div>
-        <div class="timeline-date">2025</div>
-        <div class="timeline-card">
-          <div class="timeline-tag">Internship</div>
-          <h3>Kopran Ltd.</h3>
-          <p class="timeline-role">Production Engineering Intern</p>
-          <p class="timeline-desc">
-            <ul style="list-style-type: square;">
-            <li>Supported preventive maintenance planning for pharma HVAC infrastructure</li>
-            <li>Scheduled inspections for temperature controlled warehouse systems</li>
-            <li>Maintained ERP based maintenance documentation tracking workflows</li>
-            <li>Coordinated vendor support for facility reliability operations</li>
-            </ul>
-          </p>
-          <div class="timeline-skills">
-            <span>ERP</span><span>Quality Control</span><span>Production</span>
+      <!-- CARD 3 -->
+      <div class="exp-card" data-index="2">
+        <div class="exp-card-inner">
+          <div class="exp-card-left">
+            <div class="exp-icon-wrap">
+              <!-- HVAC / pharma icon -->
+              <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg" class="exp-svg">
+                <rect x="14" y="30" width="52" height="28" rx="4" stroke="currentColor" stroke-width="2" fill="none"/>
+                <rect x="22" y="38" width="10" height="12" rx="2" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                <rect x="35" y="38" width="10" height="12" rx="2" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                <rect x="48" y="38" width="10" height="12" rx="2" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                <path d="M28 30 Q28 18 40 18 Q52 18 52 30" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                <circle cx="40" cy="18" r="3" fill="currentColor" opacity="0.7"/>
+                <line x1="20" y1="58" x2="20" y2="66" stroke="currentColor" stroke-width="1.5"/>
+                <line x1="60" y1="58" x2="60" y2="66" stroke="currentColor" stroke-width="1.5"/>
+              </svg>
+            </div>
+            <div class="exp-card-meta">
+              <span class="exp-tag">Internship</span>
+              <div class="exp-year">2025</div>
+            </div>
           </div>
+          <div class="exp-card-right">
+            <h3 class="exp-company">Kopran Ltd.</h3>
+            <p class="exp-role">Production Engineering Intern</p>
+            <ul class="exp-bullets">
+              <li>Supported preventive maintenance planning for pharma HVAC infrastructure</li>
+              <li>Scheduled inspections for temperature-controlled warehouse systems</li>
+              <li>Maintained ERP-based maintenance documentation tracking workflows</li>
+              <li>Coordinated vendor support for facility reliability operations</li>
+            </ul>
+            <div class="exp-skills">
+              <span>ERP</span><span>Quality Control</span><span>HVAC</span><span>Production</span>
+            </div>
+          </div>
+        </div>
+        <div class="exp-card-peek">
+          <span class="peek-year">2025</span>
+          <span class="peek-name">Kopran Ltd.</span>
+          <span class="peek-role">Production Engineering Intern</span>
         </div>
       </div>
 
-      <div class="timeline-item reveal-child">
-        <div class="timeline-dot"></div>
-        <div class="timeline-date">2024</div>
-        <div class="timeline-card">
-          <div class="timeline-tag">Internship</div>
-          <h3>Protomont Technologies</h3>
-          <p class="timeline-role">Design & Manufacturing Intern</p>
-          <p class="timeline-desc">
-            <ul style="list-style-type: square;">
-            <li>Designed 3D CAD assemblies in SolidWorks for AM prototype components</li>
-            <li>Applied GD&T principles for fabrication ready engineering drawings</li>
-            <li>Coordinated with vendors to ensure prototype dimensional compliance</li>
-            <li>Tracked prototype readiness across design to fabrication stages</li>
-            </ul>
-          </p>
-          <div class="timeline-skills">
-            <span>3D Printing</span><span>CREO</span><span>DFM</span>
+      <!-- CARD 4 -->
+      <div class="exp-card" data-index="3">
+        <div class="exp-card-inner">
+          <div class="exp-card-left">
+            <div class="exp-icon-wrap">
+              <!-- 3D print / CAD icon -->
+              <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg" class="exp-svg">
+                <polygon points="40,12 66,28 66,56 40,70 14,56 14,28" stroke="currentColor" stroke-width="2" fill="none"/>
+                <polygon points="40,28 54,36 54,52 40,60 26,52 26,36" stroke="currentColor" stroke-width="1.5" fill="none" opacity="0.5"/>
+                <line x1="40" y1="12" x2="40" y2="28" stroke="currentColor" stroke-width="1.5"/>
+                <line x1="66" y1="28" x2="54" y2="36" stroke="currentColor" stroke-width="1.5"/>
+                <line x1="14" y1="28" x2="26" y2="36" stroke="currentColor" stroke-width="1.5"/>
+                <circle cx="40" cy="44" r="5" fill="currentColor" opacity="0.6"/>
+              </svg>
+            </div>
+            <div class="exp-card-meta">
+              <span class="exp-tag">Internship</span>
+              <div class="exp-year">2024</div>
+            </div>
           </div>
+          <div class="exp-card-right">
+            <h3 class="exp-company">Protomont Technologies</h3>
+            <p class="exp-role">Design & Manufacturing Intern</p>
+            <ul class="exp-bullets">
+              <li>Designed 3D CAD assemblies in SolidWorks for AM prototype components</li>
+              <li>Applied GD&T principles for fabrication-ready engineering drawings</li>
+              <li>Coordinated with vendors to ensure prototype dimensional compliance</li>
+              <li>Tracked prototype readiness across design-to-fabrication stages</li>
+            </ul>
+            <div class="exp-skills">
+              <span>SolidWorks</span><span>3D Printing</span><span>GD&T</span><span>DFM</span>
+            </div>
+          </div>
+        </div>
+        <div class="exp-card-peek">
+          <span class="peek-year">2024</span>
+          <span class="peek-name">Protomont Technologies</span>
+          <span class="peek-role">Design & Manufacturing Intern</span>
         </div>
       </div>
 
-
-      <div class="timeline-item reveal-child">
-        <div class="timeline-dot timeline-dot-start"></div>
-        <div class="timeline-date">2022 – 2026</div>
-        <div class="timeline-card">
-          <div class="timeline-tag">Education</div>
-          <h3>B.Tech Mechanical Engineering</h3>
-          <p class="timeline-role">Undergraduate Studies — Batch of 2026</p>
-          <p class="timeline-desc">
-            Core focus on mechanical design, thermodynamics, fluid mechanics, 
-            CAE, and manufacturing processes.
-          </p>
-          <div class="timeline-skills">
-            <span>Core Mech</span><span>Thermodynamics</span><span>CAE</span>
+      <!-- CARD 5 — Education -->
+      <div class="exp-card exp-card--edu" data-index="4">
+        <div class="exp-card-inner">
+          <div class="exp-card-left">
+            <div class="exp-icon-wrap">
+              <!-- Graduation cap icon -->
+              <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg" class="exp-svg">
+                <polygon points="40,14 72,30 40,46 8,30" fill="none" stroke="currentColor" stroke-width="2"/>
+                <path d="M20 38 L20 56 Q40 66 60 56 L60 38" stroke="currentColor" stroke-width="2" fill="none"/>
+                <line x1="72" y1="30" x2="72" y2="50" stroke="currentColor" stroke-width="2"/>
+                <circle cx="72" cy="52" r="3" fill="currentColor"/>
+                <line x1="40" y1="46" x2="40" y2="56" stroke="currentColor" stroke-width="1.5" opacity="0.4"/>
+              </svg>
+            </div>
+            <div class="exp-card-meta">
+              <span class="exp-tag exp-tag--edu">Education</span>
+              <div class="exp-year">2022–26</div>
+            </div>
           </div>
+          <div class="exp-card-right">
+            <h3 class="exp-company">B.Tech Mechanical Engineering</h3>
+            <p class="exp-role">Undergraduate Studies — Batch of 2026</p>
+            <p class="exp-edu-desc">
+              Core focus on mechanical design, thermodynamics, fluid mechanics,
+              CAE, and manufacturing processes. Participated in technical projects
+              spanning simulation, fabrication, and system design.
+            </p>
+            <div class="exp-skills">
+              <span>Core Mech</span><span>Thermodynamics</span><span>Fluid Mechanics</span><span>CAE</span>
+            </div>
+          </div>
+        </div>
+        <div class="exp-card-peek">
+          <span class="peek-year">2022</span>
+          <span class="peek-name">B.Tech Mechanical Engineering</span>
+          <span class="peek-role">Batch of 2026</span>
         </div>
       </div>
 
@@ -378,7 +493,7 @@
       <div class="contact-card reveal-child">
         <div class="contact-icon">🔗</div>
         <h4>LinkedIn</h4>
-        <a href="https://www.linkedin.com/in/akshadabr/" target="_blank">Connect on LinkedIn ↗</a>
+        <a href="https://linkedin.com" target="_blank">Connect on LinkedIn ↗</a>
       </div>
     </div>
   </section>

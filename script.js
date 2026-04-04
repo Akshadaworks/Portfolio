@@ -185,6 +185,49 @@ function initThreeJS() {
 initThreeJS();
 
 /* =========================
+   STACKED EXPERIENCE CARDS
+========================= */
+(function () {
+  const cards = Array.from(document.querySelectorAll('.exp-card'));
+  if (!cards.length) return;
+
+  const NAVBAR_H = 80;
+  const CARD_PEEK = 12;
+
+  function updateCards() {
+    cards.forEach((card, i) => {
+      const stickyTop = NAVBAR_H + i * CARD_PEEK;
+      const nextCard = cards[i + 1];
+
+      // Card is covered when the NEXT card has slid over it
+      const isCovered = nextCard
+        ? nextCard.getBoundingClientRect().top < stickyTop + 80
+        : false;
+
+      card.classList.toggle('is-covered', isCovered);
+
+      if (isCovered) {
+        // How many cards are now on top of this one
+        const depth = cards.slice(i + 1).filter(c =>
+          c.getBoundingClientRect().top < stickyTop + 80
+        ).length;
+
+        const scale = Math.max(0.93, 1 - depth * 0.018);
+        card.style.transform = `scale(${scale})`;
+        card.style.transformOrigin = 'top center';
+      } else {
+        card.style.transform = '';
+        card.style.transformOrigin = '';
+      }
+    });
+  }
+
+  window.addEventListener('scroll', updateCards, { passive: true });
+  window.addEventListener('resize', updateCards, { passive: true });
+  updateCards();
+})();
+
+/* =========================
    HELPERS
 ========================= */
 function scrollToAbout() {

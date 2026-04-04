@@ -42,19 +42,19 @@ h1, h2, h3, h4, .nav-logo, .section-label, .hero-tag {
 }
 
 .light-theme {
-  --bg: #f5f0e8;
-  --bg2: #ece6d8;
-  --text: #1a1a2e;
-  --text-muted: #5a6270;
-  --card: #fff9ef;
-  --card2: #f0e9d8;
-  --accent: #c96a1a;
-  --accent2: #e8823a;
-  --border: rgba(0,0,0,0.08);
-  --border-accent: rgba(201,106,26,0.35);
-  --nav-bg: rgba(245,240,232,0.9);
-  --glass: rgba(255,255,255,0.55);
-  --shadow: 0 8px 32px rgba(0,0,0,0.1);
+  --bg: #d6cfc4;
+  --bg2: #cbc3b7;
+  --text: #1e1c1a;
+  --text-muted: #5a5248;
+  --card: #ddd6cb;
+  --card2: #cfc8bc;
+  --accent: #b35c12;
+  --accent2: #d4712a;
+  --border: rgba(0,0,0,0.12);
+  --border-accent: rgba(179,92,18,0.35);
+  --nav-bg: rgba(210,202,194,0.92);
+  --glass: rgba(214,207,196,0.82);
+  --shadow: 0 8px 32px rgba(0,0,0,0.15);
 }
 
 /* =========================
@@ -272,9 +272,20 @@ body {
   font-weight: 800;
   line-height: 1.05;
   letter-spacing: -1px;
-  background: linear-gradient(135deg, var(--accent2) 0%, #e2e8f0 60%);
+  background: linear-gradient(135deg, var(--accent2) 0%, var(--text) 65%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hero-surname {
+  /* no opacity reduction — let the gradient carry the contrast */
+}
+
+/* Light theme: override hero name to full dark for legibility */
+.light-theme .hero-name {
+  background: linear-gradient(135deg, var(--accent) 0%, #2a1f14 70%);
+  -webkit-background-clip: text;
   background-clip: text;
 }
 
@@ -629,129 +640,186 @@ body {
 }
 
 /* =========================
-   TIMELINE
+   EXPERIENCE STACKED CARDS
 ========================= */
-.timeline {
+.exp-section {
+  padding: 110px 0 0;
   position: relative;
-  padding-left: 30px;
-  max-width: 800px;
-  margin: 0 auto;
 }
 
-.timeline::before {
+.exp-header {
+  padding: 0 60px;
+  max-width: 1200px;
+  margin: 0 auto 60px;
+}
+
+.exp-header .section-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 12px;
+}
+
+.exp-header h2 {
+  font-size: 38px;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+}
+
+/* Stack wrapper — tall enough to scroll through all cards */
+.exp-stack {
+  position: relative;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+/* Each card */
+.exp-card {
+  position: sticky;
+  top: 80px;
+  border-radius: 22px;
+  border: 1px solid var(--border);
+  background: var(--card);
+  box-shadow: 0 12px 48px rgba(0,0,0,0.35);
+  overflow: hidden;
+  margin-bottom: 24px;
+  transition: transform 0.3s ease, box-shadow 0.3s;
+  will-change: transform;
+}
+
+/* Staggered sticky top so each card peeks a strip above the next */
+.exp-card[data-index="0"] { top: 80px;  z-index: 6; }
+.exp-card[data-index="1"] { top: 92px;  z-index: 7; }
+.exp-card[data-index="2"] { top: 104px; z-index: 8; }
+.exp-card[data-index="3"] { top: 116px; z-index: 9; }
+.exp-card[data-index="4"] { top: 128px; z-index: 10; }
+
+/* Each card gets a slightly different bg to show stacking depth */
+.exp-card[data-index="1"] { background: color-mix(in srgb, var(--card) 95%, var(--accent) 5%); }
+.exp-card[data-index="2"] { background: color-mix(in srgb, var(--card) 90%, var(--accent) 10%); }
+.exp-card[data-index="3"] { background: color-mix(in srgb, var(--card) 85%, var(--accent) 15%); }
+.exp-card[data-index="4"] { background: color-mix(in srgb, var(--card) 80%, var(--accent) 20%); }
+
+/* Accent top bar per card */
+.exp-card::before {
   content: '';
   position: absolute;
-  left: 0;
-  top: 0;
-  bottom: 0;
-  width: 2px;
-  background: linear-gradient(to bottom, var(--accent), transparent);
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--accent), transparent);
 }
 
-.timeline-item {
-  position: relative;
-  padding-left: 40px;
-  padding-bottom: 48px;
+/* ---- INNER LAYOUT ---- */
+.exp-card-inner {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  min-height: 320px;
 }
 
-.timeline-item:last-child {
-  padding-bottom: 0;
+/* Left panel */
+.exp-card-left {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  padding: 36px 24px;
+  border-right: 1px solid var(--border);
+  background: rgba(0,0,0,0.08);
 }
 
-.timeline-dot {
-  position: absolute;
-  left: -7px;
-  top: 4px;
-  width: 16px;
-  height: 16px;
-  border-radius: 50%;
-  background: var(--accent);
-  border: 3px solid var(--bg);
-  box-shadow: 0 0 0 2px var(--accent);
-  transition: transform 0.3s;
+.light-theme .exp-card-left {
+  background: rgba(0,0,0,0.04);
 }
 
-.timeline-dot-start {
-  background: var(--bg2);
-  border-color: var(--accent);
-}
-
-.timeline-item:hover .timeline-dot {
-  transform: scale(1.3);
-}
-
-.timeline-date {
-  font-family: 'Syne', sans-serif;
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 2px;
+.exp-icon-wrap {
+  width: 80px;
+  height: 80px;
   color: var(--accent);
-  margin-bottom: 10px;
-  text-transform: uppercase;
 }
 
-.timeline-card {
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 14px;
-  padding: 24px 28px;
-  transition: 0.3s;
+.exp-svg {
+  width: 100%;
+  height: 100%;
 }
 
-.timeline-item:hover .timeline-card {
-  border-color: var(--border-accent);
-  transform: translateX(4px);
+.exp-card-meta {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
 }
 
-.timeline-tag {
-  display: inline-block;
+.exp-tag {
+  font-family: 'Syne', sans-serif;
   font-size: 10px;
   font-weight: 700;
   letter-spacing: 2px;
   text-transform: uppercase;
   color: var(--accent2);
   background: var(--border-accent);
-  border-radius: 4px;
   padding: 3px 10px;
-  margin-bottom: 10px;
+  border-radius: 4px;
 }
 
-.timeline-card h3 {
-  font-size: 20px;
-  font-weight: 700;
+.exp-tag--edu {
+  color: #7ec8b0;
+  background: rgba(126,200,176,0.15);
+}
+
+.exp-year {
+  font-family: 'Syne', sans-serif;
+  font-size: 26px;
+  font-weight: 800;
+  color: var(--accent);
+  letter-spacing: -1px;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+/* Right panel */
+.exp-card-right {
+  padding: 36px 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.exp-company {
+  font-size: 24px;
+  font-weight: 800;
+  letter-spacing: -0.3px;
+  line-height: 1.1;
+  color: var(--text);
+}
+
+.exp-role {
+  font-size: 13px;
+  color: var(--accent2);
+  font-weight: 500;
   margin-bottom: 4px;
 }
 
-.timeline-role {
-  font-size: 13px;
-  color: var(--text-muted);
-  margin-bottom: 12px;
-}
-
-.timeline-desc {
-  font-size: 14px;
-  line-height: 1.7;
-  color: var(--text-muted);
-  margin-bottom: 16px;
-}
-
-.timeline-desc ul {
+.exp-bullets {
   list-style: none;
-  padding: 0;
-  margin: 0;
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 7px;
+  margin: 4px 0 8px;
 }
 
-.timeline-desc ul li {
+.exp-bullets li {
   position: relative;
-  padding-left: 16px;
+  padding-left: 18px;
   font-size: 13.5px;
   line-height: 1.6;
+  color: var(--text-muted);
 }
 
-.timeline-desc ul li::before {
+.exp-bullets li::before {
   content: "▸";
   position: absolute;
   left: 0;
@@ -760,13 +828,20 @@ body {
   top: 2px;
 }
 
-.timeline-skills {
+.exp-edu-desc {
+  font-size: 13.5px;
+  line-height: 1.7;
+  color: var(--text-muted);
+}
+
+.exp-skills {
   display: flex;
   gap: 8px;
   flex-wrap: wrap;
+  margin-top: 4px;
 }
 
-.timeline-skills span {
+.exp-skills span {
   font-size: 11px;
   font-weight: 600;
   font-family: 'Syne', sans-serif;
@@ -776,6 +851,175 @@ body {
   border-radius: 20px;
   color: var(--text-muted);
   letter-spacing: 0.5px;
+}
+
+/* ---- PEEK BAR (shown when card is covered) ---- */
+.exp-card-peek {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 14px 32px;
+  border-top: 1px solid var(--border);
+  background: rgba(0,0,0,0.12);
+  opacity: 0;
+  height: 0;
+  overflow: hidden;
+  transition: opacity 0.3s, height 0.3s;
+  pointer-events: none;
+}
+
+.exp-card.is-covered .exp-card-peek {
+  opacity: 1;
+  height: 52px;
+}
+
+.exp-card.is-covered .exp-card-inner {
+  /* content stays intact, peek bar just appears below */
+}
+
+.peek-year {
+  font-family: 'Syne', sans-serif;
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--accent);
+  letter-spacing: 1px;
+  white-space: nowrap;
+}
+
+.peek-name {
+  font-family: 'Syne', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.peek-role {
+  font-size: 12px;
+  color: var(--text-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Education card accent */
+.exp-card--edu::before {
+  background: linear-gradient(90deg, #7ec8b0, transparent);
+}
+
+/* Bottom spacer so last card fully scrolls */
+/* .exp-stack::after {
+  content: '';
+  display: block;
+  height: 60vh;
+} */
+
+/* Mobile */
+@media (max-width: 768px) {
+  .exp-section { padding: 80px 0 0; }
+  .exp-header { padding: 0 20px; margin-bottom: 40px; }
+  .exp-header h2 { font-size: 28px; }
+
+  .exp-stack { padding: 0 12px; }
+  .exp-card { border-radius: 18px; margin-bottom: 16px; }
+
+  /* Stack vertically: icon row on top, content below */
+  .exp-card-inner {
+    grid-template-columns: 1fr;
+    min-height: unset;
+  }
+
+  /* Left panel becomes a compact horizontal strip */
+  .exp-card-left {
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 16px 20px;
+    border-right: none;
+    border-bottom: 1px solid var(--border);
+    gap: 14px;
+    background: rgba(0,0,0,0.1);
+  }
+
+  .exp-icon-wrap {
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+  }
+
+  /* Meta row: tag + year side by side, no wrap */
+  .exp-card-meta {
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: nowrap;
+  }
+
+  .exp-year {
+    font-size: 16px;
+    letter-spacing: 0;
+    white-space: nowrap; /* prevents "2022-\n26" wrap */
+  }
+
+  .exp-tag {
+    font-size: 9px;
+    letter-spacing: 1px;
+    padding: 3px 8px;
+    white-space: nowrap;
+  }
+
+  /* Right content panel */
+  .exp-card-right {
+    padding: 20px;
+    gap: 8px;
+    overflow: hidden; /* clips any overflowing skill chips */
+  }
+
+  .exp-company { font-size: 18px; line-height: 1.2; }
+  .exp-role { font-size: 12px; }
+
+  .exp-bullets li { font-size: 12.5px; }
+
+  /* Skills wrap but stay inside card */
+  .exp-skills {
+    flex-wrap: wrap;
+    gap: 6px;
+    overflow: hidden; /* no chip bleeds out */
+  }
+
+  .exp-skills span {
+    font-size: 10px;
+    padding: 3px 10px;
+  }
+
+  /* Peek bar — compact single line */
+  .exp-card-peek {
+    padding: 10px 16px;
+    gap: 10px;
+    overflow: hidden;
+  }
+
+  .exp-card.is-covered .exp-card-peek {
+    height: 44px;
+  }
+
+  .peek-year { font-size: 12px; flex-shrink: 0; }
+
+  .peek-name {
+    font-size: 13px;
+    flex: 1;
+    min-width: 0; /* allows ellipsis to work */
+  }
+
+  .peek-role {
+    font-size: 11px;
+    flex-shrink: 0;
+    max-width: 90px;
+  }
+
+  .exp-stack::after { height: 20vh; }
 }
 
 /* =========================
