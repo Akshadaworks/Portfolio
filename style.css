@@ -261,3 +261,213 @@ button:hover {
     padding: 80px 15px;
   }
 }
+
+/* SKILLS GRID */
+.skills-grid {
+  margin-top: 30px;
+}
+
+/* SKILL CARD IMPROVEMENT */
+.skill-card {
+  position: relative;
+  text-align: left;
+  overflow: hidden;
+}
+
+/* Top Accent Line (Mechanical feel) */
+.skill-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: var(--accent);
+}
+
+/* Heading */
+.skill-card h3 {
+  margin-bottom: 15px;
+  color: var(--accent);
+  font-size: 18px;
+}
+
+/* List Styling */
+.skill-card ul {
+  list-style: none;
+}
+
+.skill-card ul li {
+  margin-bottom: 8px;
+  font-size: 14px;
+  position: relative;
+  padding-left: 18px;
+}
+
+/* Custom bullet (gear-style dot) */
+.skill-card ul li::before {
+  content: "⚙️";
+  position: absolute;
+  left: 0;
+}
+
+/* Hover Effect */
+.skill-card:hover {
+  transform: translateY(-6px) scale(1.02);
+  border-color: var(--accent);
+}
+
+/* ABOUT LAYOUT */
+.about-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  align-items: center;
+  margin-top: 40px;
+}
+
+/* LEFT SIDE */
+.about-left h3 {
+  margin-bottom: 15px;
+  color: var(--accent);
+}
+
+.about-left p {
+  margin-bottom: 15px;
+  line-height: 1.6;
+  font-size: 15px;
+}
+
+/* RIGHT SIDE */
+.about-right {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+/* BOXES */
+.about-box {
+  padding: 20px;
+  border-radius: 12px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  text-align: left;
+  transition: 0.3s;
+}
+
+.about-box h4 {
+  margin-bottom: 8px;
+  color: var(--accent);
+  font-size: 15px;
+}
+
+.about-box p {
+  font-size: 13px;
+}
+
+/* HOVER */
+.about-box:hover {
+  transform: translateY(-5px);
+  border-color: var(--accent);
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .about-container {
+    grid-template-columns: 1fr;
+  }
+
+  .about-right {
+    grid-template-columns: 1fr;
+  }
+}
+/* SCROLL INDICATOR */
+.scroll-down {
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  cursor: pointer;
+}
+
+/* Mouse Shape */
+.scroll-down span {
+  display: block;
+  width: 25px;
+  height: 40px;
+  border: 2px solid var(--text);
+  border-radius: 20px;
+  position: relative;
+}
+
+/* Moving dot */
+.scroll-down span::before {
+  content: "";
+  position: absolute;
+  top: 8px;
+  left: 50%;
+  width: 4px;
+  height: 8px;
+  background: var(--text);
+  border-radius: 50%;
+  transform: translateX(-50%);
+  animation: scrollAnim 1.5s infinite;
+}
+
+/* Animation */
+@keyframes scrollAnim {
+  0% { opacity: 0; transform: translate(-50%, 0); }
+  50% { opacity: 1; }
+  100% { opacity: 0; transform: translate(-50%, 12px); }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+/* SCROLL HINT */
+.scroll-hint {
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  cursor: pointer;
+  opacity: 0.7;
+  transition: 0.3s;
+}
+
+.scroll-hint:hover {
+  opacity: 1;
+  transform: translateX(-50%) translateY(-5px);
+}
+
+/* TEXT */
+.scroll-hint p {
+  font-size: 12px;
+  letter-spacing: 2px;
+  margin-bottom: 5px;
+  color: var(--text);
+  opacity: 0.7;
+}
+
+/* ARROW */
+.arrow {
+  width: 12px;
+  height: 12px;
+  border-left: 2px solid var(--accent);
+  border-bottom: 2px solid var(--accent);
+  transform: rotate(-45deg);
+  margin: auto;
+
+  animation: arrowBounce 1.5s infinite;
+}
+
+/* ANIMATION */
+@keyframes arrowBounce {
+  0%, 100% {
+    transform: translateY(0) rotate(-45deg);
+  }
+  50% {
+    transform: translateY(8px) rotate(-45deg);
+  }
+}
