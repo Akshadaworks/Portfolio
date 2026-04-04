@@ -739,6 +739,31 @@ body {
   margin-bottom: 16px;
 }
 
+.timeline-desc ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.timeline-desc ul li {
+  position: relative;
+  padding-left: 16px;
+  font-size: 13.5px;
+  line-height: 1.6;
+}
+
+.timeline-desc ul li::before {
+  content: "▸";
+  position: absolute;
+  left: 0;
+  color: var(--accent);
+  font-size: 12px;
+  top: 2px;
+}
+
 .timeline-skills {
   display: flex;
   gap: 8px;
