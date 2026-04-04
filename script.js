@@ -1,3 +1,37 @@
+/* =========================
+   🌗 THEME TOGGLE
+========================= */
+
+const toggleBtn = document.getElementById("theme-toggle");
+
+// Load saved theme
+const savedTheme = localStorage.getItem("theme");
+
+if (savedTheme === "light") {
+  document.body.classList.add("light-theme");
+  toggleBtn.textContent = "☀️";
+} else {
+  toggleBtn.textContent = "🌙";
+}
+
+// Toggle theme
+toggleBtn.addEventListener("click", () => {
+  document.body.classList.toggle("light-theme");
+
+  if (document.body.classList.contains("light-theme")) {
+    toggleBtn.textContent = "☀️";
+    localStorage.setItem("theme", "light");
+  } else {
+    toggleBtn.textContent = "🌙";
+    localStorage.setItem("theme", "dark");
+  }
+});
+
+
+/* =========================
+   ⚙️ THREE JS HERO (UPDATED COLORS)
+========================= */
+
 function initThreeJS() {
   const canvas = document.getElementById('hero-canvas');
   if (!canvas) return;
@@ -21,14 +55,17 @@ function initThreeJS() {
   renderer.setSize(window.innerWidth, window.innerHeight);
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
-  // 🔥 BIGGER + SMOOTHER SPHERE
   const geometry = new THREE.IcosahedronGeometry(3.2, 4);
 
-  // 🔵 WIREFRAME (VISIBLE NOW)
-  const wireMaterial = new THREE.LineBasicMaterial({
-    color: 0x00f3ff,
+  let wireMaterial = new THREE.LineBasicMaterial({
+    color: 0xff7a18,
     transparent: true,
     opacity: 0.6
+  });
+
+  let pointsMaterial = new THREE.PointsMaterial({
+    color: 0xffffff,
+    size: 0.08
   });
 
   const wireframe = new THREE.LineSegments(
@@ -36,36 +73,20 @@ function initThreeJS() {
     wireMaterial
   );
 
-  // 🟣 DOTS (MORE VISIBLE)
-  const pointsMaterial = new THREE.PointsMaterial({
-    color: 0x9d2eff,
-    size: 0.08,
-    transparent: true,
-    opacity: 1
-  });
-
   const points = new THREE.Points(geometry, pointsMaterial);
 
-  // 🔥 GROUP
   const group = new THREE.Group();
   group.add(wireframe);
   group.add(points);
 
-  // 👉 POSITION FIX (NOT TOO FAR)
-  group.position.x = window.innerWidth > 768 ? 1.5 : 0;
-
   scene.add(group);
 
-  // 🖱️ MOUSE INTERACTION
   let mouseX = 0, mouseY = 0;
   let targetX = 0, targetY = 0;
 
-  const halfX = window.innerWidth / 2;
-  const halfY = window.innerHeight / 2;
-
   document.addEventListener('mousemove', (e) => {
-    mouseX = (e.clientX - halfX);
-    mouseY = (e.clientY - halfY);
+    mouseX = (e.clientX - window.innerWidth / 2);
+    mouseY = (e.clientY - window.innerHeight / 2);
   });
 
   const clock = new THREE.Clock();
@@ -75,18 +96,15 @@ function initThreeJS() {
 
     const time = clock.getElapsedTime();
 
-    // 🔄 BASE ROTATION
     group.rotation.y += 0.003;
     group.rotation.x += 0.0015;
 
-    // 🧠 SMOOTH FOLLOW
     targetX = mouseX * 0.0008;
     targetY = mouseY * 0.0008;
 
     group.rotation.y += (targetX - group.rotation.y) * 0.05;
     group.rotation.x += (targetY - group.rotation.x) * 0.05;
 
-    // 💓 BREATHING EFFECT
     const scale = 1 + Math.sin(time * 2) * 0.03;
     group.scale.set(scale, scale, scale);
 
@@ -95,15 +113,11 @@ function initThreeJS() {
 
   animate();
 
-  // 📱 RESPONSIVE
   window.addEventListener('resize', () => {
     camera.aspect = window.innerWidth / window.innerHeight;
     camera.updateProjectionMatrix();
     renderer.setSize(window.innerWidth, window.innerHeight);
-
-    group.position.x = window.innerWidth > 768 ? 1.5 : 0;
   });
 }
 
-// INIT
 initThreeJS();
